@@ -47,7 +47,7 @@ class Category(models.Model):
         (MISC, 'Miscelleneous'),
     ]
 
-    category = models.CharField(choices=CATEGORY_CHOICES,max_length=100,default=MISC)
+    category = models.CharField(max_length=100)
 
     def __str__(self):
         return (self.category)
