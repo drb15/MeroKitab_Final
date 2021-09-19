@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth import login,authenticate,logout
 from django.contrib.auth.models import User
 from home.models import Product,Contact,Category
-from home.forms import CreateUserForm,AddProductForm,ReviewForm
+from home.forms import CreateUserForm,AddProductForm,ReviewForm,ResetPassForm
 from django.contrib import messages
 
 # Create your views here.
@@ -99,6 +99,19 @@ def prod_detail(request,pk):
     context = { 'produc':produc,'comment_form':comment_form,'rev':rev,'new_comment':new_comment }
     return render(request,'prod_details.html',context)
 
+
+
+def ResetPassword(request):
+    form = ResetPassForm()
+
+    if request.method == 'POST':
+        form = ResetPassForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data.get('email')
+            messages.success(request,'An email containing your password was sent to  '+ email)
+    
+
+    return render(request,'reset_password.html',{'form': form})
         
 def contactus(request):
     if request.method=="POST":

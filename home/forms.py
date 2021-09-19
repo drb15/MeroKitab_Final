@@ -18,3 +18,8 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = ['comment']
+
+class ResetPassForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['email']

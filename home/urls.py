@@ -12,6 +12,7 @@ urlpatterns = [
    path('prod_detail/<str:pk>/',views.prod_detail,name = 'prod_detail'),
    path('search',views.search,name = 'search'),
    path('userprofile',views.userprofile,name = 'userprofile'),
+   path('reset_password',views.ResetPassword,name = 'ResetPassword'),
    path('category/<str:cats>/',views.category_view,name = 'category_view')
 
 ]
