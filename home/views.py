@@ -2,11 +2,12 @@ from django.db import models
 from django.http.response import JsonResponse
 from django.shortcuts import render,HttpResponse,redirect
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
-from django.contrib.auth import login,authenticate,logout
+from django.contrib.auth import login,authenticate,logout,get_user_model
 from django.contrib.auth.models import User
 from home.models import Product,Contact,Category
 from home.forms import CreateUserForm,AddProductForm,ReviewForm,ResetPassForm
 from django.contrib import messages
+from django.core.mail import send_mail
 
 # Create your views here.
 
@@ -81,10 +82,12 @@ def signup_view(request):
             form.save()
             user = form.cleaned_data.get('username')
             messages.success(request,'Account was created for '+ user)
-            return render(request,'login.html')
+            return redirect('/login')
 
     context = {'form':form}
     return render(request,'signup.html',context)
+
+
 def prod_detail(request,pk):
     produc = Product.objects.get(id=pk)
     rev = produc.comments.all()
@@ -99,19 +102,6 @@ def prod_detail(request,pk):
     context = { 'produc':produc,'comment_form':comment_form,'rev':rev,'new_comment':new_comment }
     return render(request,'prod_details.html',context)
 
-
-
-def ResetPassword(request):
-    form = ResetPassForm()
-
-    if request.method == 'POST':
-        form = ResetPassForm(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data.get('email')
-            messages.success(request,'An email containing your password was sent to  '+ email)
-    
-
-    return render(request,'reset_password.html',{'form': form})
         
 def contactus(request):
     if request.method=="POST":
