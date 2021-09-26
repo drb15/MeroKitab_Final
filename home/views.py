@@ -2,11 +2,12 @@ from django.db import models
 from django.http.response import JsonResponse
 from django.shortcuts import render,HttpResponse,redirect
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
-from django.contrib.auth import login,authenticate,logout
+from django.contrib.auth import login,authenticate,logout,get_user_model
 from django.contrib.auth.models import User
 from home.models import Product,Contact,Category
-from home.forms import CreateUserForm,AddProductForm,ReviewForm
+from home.forms import CreateUserForm,AddProductForm,ReviewForm,ResetPassForm
 from django.contrib import messages
+from django.core.mail import send_mail
 
 # Create your views here.
 
@@ -81,10 +82,12 @@ def signup_view(request):
             form.save()
             user = form.cleaned_data.get('username')
             messages.success(request,'Account was created for '+ user)
-            return render(request,'login.html')
+            return redirect('/login')
 
     context = {'form':form}
     return render(request,'signup.html',context)
+
+
 def prod_detail(request,pk):
     produc = Product.objects.get(id=pk)
     rev = produc.comments.all()

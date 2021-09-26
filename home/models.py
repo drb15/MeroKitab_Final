@@ -19,33 +19,6 @@ class Profile(models.Model):
     local_add = models.CharField(max_length=50)
 
 class Category(models.Model):
-    FICTION = 'Fiction'
-    ENGINEERING = 'Engineering'
-    SCIENCE = 'Science'
-    MANAGEMENT = 'Management'
-    LITERATURE = 'Literature'
-    ARTS = 'Arts'
-    SCHOOL = 'School'
-    RELIGION = 'Religion'
-    ENTRANCE = 'Entrance'
-    GOVERNMENT = 'Government'
-    MISC = 'Miscellenous'
-    LAW = 'Law'
-    
-    CATEGORY_CHOICES = [
-        (FICTION, 'Fiction'),
-        (ENGINEERING, 'Engineering'),
-        (SCIENCE, 'Science'),
-        (MANAGEMENT, 'Management'),
-        (LITERATURE, 'Literature'),
-        (ARTS, 'Arts'),
-        (SCHOOL, 'School Level'),
-        (RELIGION, 'Religion'),
-        (LAW, 'Law'),
-        (ENTRANCE, 'Entrance Preparation'),
-        (GOVERNMENT,'Government Jobs'),
-        (MISC, 'Miscelleneous'),
-    ]
 
     category = models.CharField(max_length=100)
 
