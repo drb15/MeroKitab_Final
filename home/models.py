@@ -81,6 +81,12 @@ class Contact(models.Model):
     phone = models.CharField(max_length=15)
     desc = models.TextField()
 
+class ContactSeller(models.Model):
+    name = models.CharField(max_length=30)
+    email = models.EmailField()
+    phone = models.CharField(max_length=15)
+    message_to_buyer = models.TextField()
+
 class Review(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     product = models.ForeignKey(Product,related_name='comments',on_delete=models.CASCADE)

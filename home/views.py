@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth import login,authenticate,logout,get_user_model
 from django.contrib.auth.models import User
 from home.models import Product,Contact,Category
-from home.forms import CreateUserForm,AddProductForm,ReviewForm,ResetPassForm
+from home.forms import ContactSellerForm, CreateUserForm,AddProductForm,ReviewForm
 from django.contrib import messages
 from django.core.mail import send_mail
 
@@ -30,7 +30,6 @@ def addproduct(request):
             
             if form.is_valid:
                 user = form.save(commit=False)
-                print(user)
                 user.posted_by = request.user
                 user.save()
 
@@ -99,8 +98,39 @@ def prod_detail(request,pk):
             new_comment.product = produc
             new_comment.user = request.user
             new_comment.save()
+            
     context = { 'produc':produc,'comment_form':comment_form,'rev':rev,'new_comment':new_comment }
     return render(request,'prod_details.html',context)
+
+def contact_seller(request,pk):
+    sellerInfo = Product.objects.get(id=pk)
+    
+    if request.method=="POST":
+        name = request.user
+        email = request.user.email
+        phone = request.POST['phone']
+        desc = request.POST['desc']
+        
+        #Obtaining the seller's email id by using username stored in the Products model.
+        sellerName = sellerInfo.posted_by
+        userInfo = User.objects.get(username = sellerName)
+        sellervar = userInfo.email
+        sellerEmail = [sellervar] #converting sellervar to tuple.
+        #End
+
+
+        sender_name = name
+        sender_email = email
+        descAndnum = desc + " : " + "Phone Number = "+phone + " Email = "+email
+
+        message = "{0} has sent you a new message:\n\n{1}".format(sender_name, descAndnum)
+        
+
+        send_mail('New Enquiry In Portfolio', message, sender_email, sellerEmail, fail_silently= False)
+        
+
+
+    return render(request,'contact_seller.html')
 
         
 def contactus(request):
@@ -113,6 +143,13 @@ def contactus(request):
         #creating an instance and saving the data to database
         contact = Contact(name=name,email=email,phone=phone,desc=desc)
         contact.save()
+
+        sender_name = name
+        sender_email = email
+        descAndnum = desc + " : " + "Phone Number = "+phone + " Email = "+email
+        message = "{0} has sent you a new message:\n\n{1}".format(sender_name, descAndnum)
+
+        send_mail('New Enquiry In Portfolio', message, sender_email, ['merokitabstore@gmail.com'], fail_silently= False)
     
     return render(request,'contact.html')
 

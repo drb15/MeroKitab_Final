@@ -2,7 +2,7 @@ from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django import forms
 from django.contrib.auth.models import User
-from home.models import Product, Review
+from home.models import ContactSeller, Product, Review
 
 class CreateUserForm(UserCreationForm):
     class Meta:
@@ -19,7 +19,8 @@ class ReviewForm(forms.ModelForm):
         model = Review
         fields = ['comment']
 
-class ResetPassForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = ['email']
+        
+class ContactSellerForm(forms.ModelForm):
+    class meta:
+        model = ContactSeller
+        fields = ['message_to_buyer']

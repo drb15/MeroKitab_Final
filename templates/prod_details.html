@@ -79,12 +79,14 @@
             
             
             <a href="#" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">View Details</a>
-            <a href="#" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Buy This Book</a>
+            <a href="/contact_seller/{{ produc.id }}" class="btn btn-success">Buy This Book</a>
+            
+            <!-- View Details Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Book Details</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -93,8 +95,6 @@
                     <p class="card-text">ISBN No.: {{ produc.ISBN }}</p>
                     <p class="card-text">Abstract: {{ produc.abstract }}</p>
                     <p class="card-text">{{ produc.details }}</p>
-                    
-                    
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -102,7 +102,6 @@
                 </div>
               </div>
             </div>
-            
           </div>
           
         </div>
