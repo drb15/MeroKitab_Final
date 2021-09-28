@@ -32,7 +32,7 @@ def addproduct(request):
                 user = form.save(commit=False)
                 user.posted_by = request.user
                 user.save()
-
+                messages.success(request,'Product Added Succesfully') 
         return render(request,'add_product.html',{'form': form})
              
     else:
