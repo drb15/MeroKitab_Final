@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-{% load static %}
-<head>
+  {% load static %}
 
+    <head>
+      <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Merokitab - An online book store.</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <title>Merokitab - Buy and Sell Your Books On Our Platform</title>
+
   <!-- Bootstrap core CSS -->
   <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="{% static 'css/shop-item.css' %}" rel="stylesheet">
+  <link href="{% static 'css/shop-homepage.css' %}" rel="stylesheet">
 
 </head>
 
@@ -28,6 +35,7 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+      
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
@@ -36,10 +44,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Services</a>
+            <a class="nav-link" href="{% url 'add_product' %}">Post Your Book</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'contactus' %}">Contact</a>
@@ -53,7 +58,7 @@
             
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Profile</a>
+            <a class="nav-link" href="{% url 'userprofile' %}">Profile</a>
           </li>
         </ul>
       </div>
@@ -69,8 +74,8 @@
          <!-- /.card -->
           
         <div class="card mt-4">
-          <img class="card-img-top img-fluid" src="{{ produc.photo.url }}" alt="" style="height: auto; width: 70%;">
-          <div class="card-body">
+          <img class="card-img-top img-fluid" src="{{ produc.photo.url }}" alt="" style="position:relative; left:150px;float:center; width:  500px;height: 500px;">
+          <div class="card-body" style="position:relative; left:150px;">
             <h3 class="card-title">{{ produc.name }}</h3>
             <h4>NPR: {{ produc.price }}</h4>
             <p class="card-text">Posted by: {{ produc.posted_by }}</p>
@@ -105,7 +110,7 @@
           </div>
           
         </div>
-        <div class="card card-outline-secondary my-4">
+        <div class="card card-outline-secondary my-4" >
           <div class="card-header">
             {{ rev.count }} Comments
           </div>
@@ -125,9 +130,12 @@
                 <h3>Leave a comment</h3>
                 
                 <form method="post" style="margin-top: 1.3em;">
+              
                   {{ comment_form.as_p }}
                   {% csrf_token %}
-                  <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
+                  <button type="submit" class="btn btn-primary  btn-lg" >Submit</button>
+      
+           
                 </form>
               </div>
               </div>
