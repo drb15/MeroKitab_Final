@@ -127,7 +127,7 @@
           {% for q in query %}
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="{{ q.photo.url }}" alt=""style="position:relative; left:0px; float:left; width: 252px; height: 250px;"></a>
+              <a href="#"><img class="card-img-top" src="{{ q.photo.url }}" alt="" style="position:relative; left:0px; float:left; width: 252px; height: 250px;"></a>
               <div class="card-body">
                 <h4 class="card-title">
                   <a href="{% url 'prod_detail' q.id %}">{{ q.name }}</a>
